@@ -63,7 +63,7 @@ Hauler/
 
 ## 🚀 Play Online
 
-[Play Hauler on Vercel](#) <!-- Replace # with your Vercel URL -->
+[Play Hauler on Vercel](hauler-hazel.vercel.app) <!-- Replace # with your Vercel URL -->
 
 ## 🖥️ Run Locally
 
