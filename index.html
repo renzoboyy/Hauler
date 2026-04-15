@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hauler – Pixel Art Memory Game</title>
+  <meta name="description"
+    content="Hauler: A fast-paced memory and list-retention game with a 16-bit pixel art aesthetic. Memorize your grocery list and grab the right items before time runs out!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <audio id="bg-music" loop>
+    <source src="assets/music.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="sfx-click" src="assets/collect.mp3" preload="auto"></audio>
+
+  <!-- ═══════════════════════════════════════════════════
+       MENU SCREEN
+  ════════════════════════════════════════════════════ -->
+  <div id="screen-menu" class="screen active">
+    <div class="menu-bg-overlay"></div>
+    <div class="menu-content">
+      <div class="title-block">
+        <div class="title-icon-row">
+          <img src="Items/Carrot.png" class="title-icon t-icon-1" alt="">
+          <img src="Items/Tomato.png" class="title-icon t-icon-2" alt="">
+          <img src="Items/Banana.png" class="title-icon t-icon-3" alt="">
+        </div>
+        <h1 class="game-title">HAULER</h1>
+        <p class="game-subtitle">Memory Grocery Run</p>
+      </div>
+      <button id="btn-start" class="pixel-btn">▶ START</button>
+      <p class="menu-hint">Memorize your list · Grab the right items · Don't get fooled!</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       NOTE / MEMORIZE SCREEN
+  ════════════════════════════════════════════════════ -->
+  <div id="screen-note" class="screen">
+    <div class="note-wrapper">
+      <img src="Note.png" class="note-bg" alt="Grocery Note" />
+      <div class="note-content">
+        <p class="note-title">SHOPPING LIST</p>
+        <ul id="note-list" class="note-list"></ul>
+      </div>
+    </div>
+    <div class="note-timer-bar">
+      <div id="note-timer-fill" class="note-timer-fill"></div>
+    </div>
+    <p class="note-countdown-label">Memorize! <span id="note-countdown">5</span>s</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       STORE / GAME SCREEN
+  ════════════════════════════════════════════════════ -->
+  <div id="screen-store" class="screen">
+    <div class="store-bg-wrapper">
+      <img src="Shelf.png" id="shelf-img" alt="Store Shelf" />
+      <!-- Scrolling items canvas layer -->
+      <canvas id="store-canvas"></canvas>
+    </div>
+
+    <!-- HUD -->
+    <div class="store-hud">
+      <div class="hud-left">
+        <span class="hud-label">LEVEL</span>
+        <span id="hud-level" class="hud-value">1</span>
+      </div>
+      <div class="hud-center">
+        <span class="hud-label">BASKET</span>
+        <span id="hud-collected" class="hud-value">0</span>
+        <span class="hud-label"> / </span>
+        <span id="hud-total" class="hud-value">5</span>
+      </div>
+    </div>
+
+    <!-- Basket (bottom-left) -->
+    <div class="basket-corner">
+      <img src="Basket.png" alt="Basket" class="basket-img" />
+      <div id="basket-items-preview" class="basket-preview"></div>
+    </div>
+
+    <!-- Leave button (bottom-right) -->
+    <button id="btn-leave" class="pixel-btn leave-btn">🛒 Leave the Store</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       RESULTS SCREEN
+  ════════════════════════════════════════════════════ -->
+  <div id="screen-results" class="screen">
+    <div class="results-panel">
+      <h2 class="results-title">CHECKOUT</h2>
+
+      <!-- Stars -->
+      <div id="results-stars" class="stars-row"></div>
+      <p id="results-percent" class="results-pct"></p>
+      <p id="results-spoiled-warning" class="spoiled-warning" style="display:none;"></p>
+
+      <!-- Comparison table -->
+      <div class="comparison-grid">
+        <div class="cmp-col">
+          <p class="cmp-header">📋 Your List</p>
+          <div id="cmp-list" class="cmp-items"></div>
+        </div>
+        <div class="cmp-col">
+          <p class="cmp-header">🛒 You Grabbed</p>
+          <div id="cmp-grabbed" class="cmp-items"></div>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="results-actions">
+        <button id="btn-exit" class="pixel-btn small-btn exit-btn">✕ Menu</button>
+        <button id="btn-next" class="pixel-btn small-btn next-btn">▶ Next Level</button>
+      </div>
+      <p id="results-fail-msg" class="fail-msg" style="display:none;">
+        Better luck next time!
+      </p>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+
+</html>
