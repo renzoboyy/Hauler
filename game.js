@@ -50,6 +50,13 @@ let groceryList = [];   // [{name, qty}]
 let basket = [];   // names collected (may duplicate for qty)
 const bgMusic = document.getElementById('bg-music');
 
+document.getElementById('screen-menu').addEventListener('click', () => {
+  if (bgMusic.paused) {
+    bgMusic.volume = 0.5;
+    bgMusic.play().catch(() => { });
+  }
+}, { once: false });
+
 function playClickSFX() {
   const sfxClick = document.getElementById('sfx-click');
   if (!sfxClick) return;
@@ -113,12 +120,7 @@ document.getElementById('btn-start').addEventListener('click', startGame);
 function startGame() {
   level = 1;
   listSize = BASE_LIST_SIZE;
-  // Start the music here!
-  bgMusic.currentTime = 0; // Restart track from beginning
-  bgMusic.volume = 0.2; // Set volume to 50%
-  bgMusic.play().catch(e => console.error("Audio failed:", e));    // Optional: Set a comfortable volume
   beginRound();
-
 }
 
 // ────────────────────────────────────────────────────────
